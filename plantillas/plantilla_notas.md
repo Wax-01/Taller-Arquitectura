@@ -4,9 +4,8 @@
 _Indique la fecha de la clase en que se trabajó este taller._
 
 ## 👥 Integrantes presentes
-- Nombre 1
-- Nombre 2
-- Nombre 3
+- Julian Aguilar
+- Esteban Ramirez
 
 ## 🧠 Actividades realizadas en clase
 
@@ -15,6 +14,9 @@ Describa brevemente qué se hizo durante la sesión:
 - ¿Qué se discutió con el equipo?
 - ¿Qué decisiones de modelado se tomaron?
 - ¿Qué herramientas se usaron (papel, pizarra, draw.io, Astah)?
+
+Draw.io
+
 - ¿Qué parte del trabajo se alcanzó a desarrollar?
 
 ## 🧩 Boceto inicial del modelo
@@ -27,9 +29,9 @@ Anote las responsabilidades acordadas entre los miembros del equipo para complet
 
 | Tarea asignada | Responsable | Fecha estimada |
 |----------------|-------------|----------------|
-| Modelado final en draw.io | Nombre 1 | 10/08 |
-| Redacción del informe     | Nombre 2 | 11/08 |
-| Investigación y referencias | Nombre 3 | 12/08 |
+| Modelado final en draw.io | Julian Aguilar | 4/09 |
+| Redacción del informe     | Julian Aguilar | 4/09 |
+| Investigación y referencias | Esteban Ramirez | 4/09 |
 
 ---
 
