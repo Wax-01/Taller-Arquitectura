@@ -12,7 +12,7 @@
         <mxCell id="coord" value="Coordinadora de la encuesta&#10;(Vicerrectoría de Desarrollo)&#10;[Persona]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1168bd;fontColor=#ffffff;strokeColor=#0b4884;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="40" y="90" width="200" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="pat" value="Estudiante PAT&#10;[Persona]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1168bd;fontColor=#ffffff;strokeColor=#0b4884;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="pat" value="Estudiante PAT&#10;[Persona]&#10;Responde la encuesta y luego&#10;la aplica en el salón" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1168bd;fontColor=#ffffff;strokeColor=#0b4884;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="40" y="420" width="200" height="90" as="geometry" />
         </mxCell>
         <mxCell id="profesor" value="Profesor&#10;[Persona]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1168bd;fontColor=#ffffff;strokeColor=#0b4884;fontSize=12;" vertex="1" parent="1">
@@ -33,7 +33,13 @@
         <mxCell id="e1" value="Define criterios de la muestra, cruza&#10;horarios y asigna PAT a clases&#10;(manual, en hojas de Excel)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=block;" edge="1" parent="1" source="coord" target="sistema">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="Reporta su disponibilidad horaria&#10;para aplicar la encuesta en el salón" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;endArrow=block;" edge="1" parent="1" source="pat" target="sistema">
+        <mxCell id="whatsapp" value="WhatsApp&#10;[Sistema externo · no institucional]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#8a8a8a;fontColor=#ffffff;strokeColor=#c0392b;strokeWidth=2;dashed=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="520" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="Envía su disponibilidad horaria&#10;(mensaje a la coordinadora)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;dashed=1;endArrow=block;" edge="1" parent="1" source="pat" target="whatsapp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="La coordinadora lee la disponibilidad&#10;y la copia a mano a la hoja" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;dashed=1;endArrow=block;" edge="1" parent="1" source="whatsapp" target="sistema">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e3" value="Exportación manual CSV/Excel de horarios,&#10;programas y datos personales&#10;(la coordinadora la descarga; sin API)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=11;dashed=1;endArrow=block;" edge="1" parent="1" source="siga" target="sistema">
@@ -46,7 +52,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="leyenda" value="Leyenda: azul oscuro = sistema en alcance · gris = sistema externo (no lo controla la Vicerrectoría) · elipse = persona&#10;Línea punteada = intercambio manual (descarga de archivo o correo escrito a mano) · línea continua = interacción directa&#10;Los estudiantes encuestados no aparecen: responden la encuesta en el salón y no interactúan con este sistema." style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#444444;" vertex="1" parent="1">
+        <mxCell id="leyenda" value="Leyenda: azul oscuro = sistema en alcance · gris = sistema externo (no lo controla la Vicerrectoría; borde rojo punteado = canal no institucional) · elipse = persona&#10;Línea punteada = intercambio manual (descarga de archivo o correo escrito a mano) · línea continua = interacción directa&#10;Los estudiantes encuestados no aparecen: responden la encuesta en la plataforma del CNA, que maneja esos datos, y no interactúan con este sistema." style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#444444;" vertex="1" parent="1">
           <mxGeometry x="40" y="690" width="1080" height="60" as="geometry" />
         </mxCell>
       </root>

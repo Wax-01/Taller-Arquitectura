@@ -9,11 +9,13 @@ _Taller 3 - Arquitectura Actual del Sistema con el Modelo C4_
 
 ## 🧠 Descripción general del trabajo
 
-El objetivo de este taller fue representar, con las vistas **C1 (Contexto)** y **C2 (Contenedores)** del modelo C4, la **arquitectura actual (AS-IS)** con la que la **Vicerrectoría de Desarrollo de la Universidad de La Sabana** gestiona hoy la logística de la encuesta anual de autosatisfacción: cómo arma la muestra, cómo asigna a los estudiantes PAT a las clases y cómo avisa a los profesores.
+El objetivo de este taller fue representar, con las vistas **C1 (Contexto)** y **C2 (Contenedores)** del modelo C4, la **arquitectura actual (AS-IS)** con la que la **Vicerrectoría de Desarrollo de la Universidad de La Sabana** gestiona hoy la logística de la encuesta bienal (cada dos años) de autosatisfacción: cómo arma la muestra, cómo asigna a los estudiantes PAT a las clases y cómo avisa a los profesores.
 
-Hoy no existe una aplicación para este proceso. El "sistema" es un conjunto de herramientas operadas a mano por la coordinadora: exporta datos de **SIGA**, los trabaja en **dos hojas de Excel guardadas en OneDrive** y avisa a cada profesor por **correo institucional**, uno a uno. Eso es lo que se modela aquí.
+Hoy no existe una aplicación para este proceso. El "sistema" es un conjunto de herramientas operadas a mano por la coordinadora: exporta datos de **SIGA**, los trabaja en **dos hojas de Excel guardadas en OneDrive** y avisa a cada profesor por **correo institucional**, uno a uno. La disponibilidad de los estudiantes PAT le llega por **WhatsApp**. La encuesta se aplica una vez cada dos años, a lo largo de un semestre completo. Eso es lo que se modela aquí.
 
 > **Corrección del Corte 2.** La primera versión de este taller modelaba la solución que el equipo propone (Microsoft Forms, Power Automate, SharePoint y Power BI), que todavía no existe. Esa versión se conserva como vista TO-BE en [`07-opportunities-solutions/c1-contexto-to-be-v1.drawio`](https://github.com/Wax-01/Unisabana-solution/blob/main/07-opportunities-solutions/c1-contexto-to-be-v1.drawio) y [`c2-contenedores-to-be-v1.drawio`](https://github.com/Wax-01/Unisabana-solution/blob/main/07-opportunities-solutions/c2-contenedores-to-be-v1.drawio).
+
+> **Actualización del 13/11/2026 (tercer corte).** La cliente confirmó: las dos hojas están en un drive compartido al que solo acceden ella y el jefe de Experiencia y Servicio; la información se conserva por temas de auditoría; los estudiantes PAT envían su disponibilidad por WhatsApp, responden la encuesta antes de aplicarla y luego la aplican; los correos a los profesores solo llevan asignatura, hora de aplicación y salón; y la encuesta se aplica una vez cada dos años, a lo largo de un semestre completo. Ver [`06-normatividad/preguntas-cliente.md`](https://github.com/Wax-01/Unisabana-solution/blob/main/06-normatividad/preguntas-cliente.md).
 
 Este taller continúa los talleres previos con el mismo cliente:
 - **Taller 0** (ficha de caracterización): el problema es el manejo manual de grandes volúmenes de datos en tareas repetitivas y propensas al error; la restricción es usar solo herramientas autorizadas por la universidad.
@@ -24,24 +26,24 @@ Este taller continúa los talleres previos con el mismo cliente:
 
 1. Se estudió la [guía paso a paso del taller](https://github.com/Wax-01/Taller-Arquitectura/blob/main/clase/guia_paso_a_paso_c4.md) y se practicó la metodología de 4 pasos por vista sobre el caso RedExpress (notas y borradores en la carpeta `clase/` del [repositorio del taller](https://github.com/Wax-01/Taller-Arquitectura)).
 2. Para el cliente se tomaron los actores, sistemas y herramientas ya confirmados en los talleres 0, 1 y 4, en lugar de volver a levantarlos.
-3. **C1**: el sistema en alcance es la **gestión manual de la logística de la encuesta** (una sola caja). Actores: la coordinadora, el estudiante PAT y el profesor. Sistemas externos que la Vicerrectoría no controla: **SIGA** y el **correo institucional (Exchange Online)**.
+3. **C1**: el sistema en alcance es la **gestión manual de la logística de la encuesta** (una sola caja). Actores: la coordinadora, el estudiante PAT y el profesor. Sistemas externos que la Vicerrectoría no controla: **SIGA**, el **correo institucional (Exchange Online)** y **WhatsApp**, por donde los PAT envían su disponibilidad.
 4. **C2**: se abrió la caja en los dos contenedores de datos que existen hoy, la **Hoja de Muestreo** y la **Hoja de Asignación PAT** (libros de Excel en OneDrive). Cada relación indica el mecanismo real: exportación manual CSV/Excel desde SIGA, edición de Excel por HTTPS y correo escrito a mano en Outlook.
 5. Se revisó que los nombres de los contenedores y sistemas externos fueran idénticos a los del mapa de infraestructura (Taller 4), el DFD (Taller 5) y el checklist (Taller 6). Ver la [tabla de trazabilidad](https://github.com/Wax-01/Unisabana-solution/blob/main/trazabilidad.md).
 6. Herramienta usada: **draw.io**, exportado como `.drawio`.
 
 ## 🧩 Análisis del modelo propuesto
 
-- **Estructura del modelo**: el C1 muestra el proceso como una sola caja frente a tres actores y dos sistemas externos. El C2 abre esa caja en dos contenedores con responsabilidades distintas: la Hoja de Muestreo decide *a quién* se encuesta y la Hoja de Asignación PAT decide *en qué clase y con qué PAT*. No hay contenedores de aplicación (flujos, servicios, formularios) porque hoy no existen: toda la lógica la ejecuta la coordinadora a mano.
+- **Estructura del modelo**: el C1 muestra el proceso como una sola caja frente a tres actores y tres sistemas externos. El C2 abre esa caja en dos contenedores con responsabilidades distintas: la Hoja de Muestreo decide *a quién* se encuesta y la Hoja de Asignación PAT decide *en qué clase y con qué PAT*. No hay contenedores de aplicación (flujos, servicios, formularios) porque hoy no existen: toda la lógica la ejecuta la coordinadora a mano.
 - **Cómo representa las necesidades del cliente**: el modelo deja a la vista los tres puntos manuales de la ficha de caracterización. Las relaciones punteadas son exactamente el trabajo repetitivo que la cliente quiere eliminar: la exportación desde SIGA, la copia entre hojas y el correo uno a uno. También muestra que los datos personales salen de SIGA y quedan copiados en las hojas, que es el punto de partida del análisis de seguridad (Taller 5) y de normatividad (Taller 6).
 - **Papel de cada actor** (definición única para todos los talleres):
   - **Coordinadora de la encuesta**: opera todo el proceso. Exporta de SIGA, arma la muestra, asigna PAT a clases y escribe los correos.
-  - **Estudiante PAT**: reporta su disponibilidad horaria y aplica la encuesta en el salón. No diseña la muestra ni responde la encuesta. Entra al C1 porque su disponibilidad es un insumo de la Hoja de Asignación PAT.
+  - **Estudiante PAT**: envía su disponibilidad horaria por WhatsApp, responde la encuesta antes de aplicarla y luego la aplica en el salón (confirmado con la cliente el 13/11/2026). No diseña la muestra. Entra al C1 porque su disponibilidad es un insumo de la Hoja de Asignación PAT.
   - **Profesor**: recibe el aviso por correo y responde si cede o no su clase.
-  - **Estudiantes encuestados**: no aparecen en el C1 porque responden la encuesta en el salón y no interactúan con las hojas ni con el correo del proceso. Sí aparecen en el mapa de infraestructura (Taller 4), que muestra a todos los participantes.
+  - **Estudiantes encuestados**: no aparecen en el C1 porque responden la encuesta en el salón, en la plataforma del CNA (Consejo Nacional de Acreditación), y no interactúan con las hojas ni con el correo del proceso. El CNA maneja los datos de las respuestas (confirmado con la cliente el 13/11/2026), así que la plataforma de la encuesta queda fuera del alcance de la logística que modela este C4.
 - **Supuestos tomados**:
   - SIGA no expone una API de integración conocida; los datos salen por consulta web y exportación a CSV/Excel (hallazgo H1 del Taller 4).
-  - Las dos hojas viven en OneDrive. Según el Taller 4, la cuenta es la institucional de la coordinadora; con quién se comparten está pendiente (pregunta P2 de [`06-normatividad/preguntas-cliente.md`](https://github.com/Wax-01/Unisabana-solution/blob/main/06-normatividad/preguntas-cliente.md)).
-  - El canal por el que el PAT reporta su disponibilidad (correo, edición directa de la hoja u otro) no está confirmado (pregunta P7). En el C2 se dibuja como entrada a la Hoja de Asignación PAT.
+  - Las dos hojas viven en un drive compartido de OneDrive al que solo acceden la coordinadora y el jefe de Experiencia y Servicio (confirmado con la cliente el 13/11/2026).
+  - La disponibilidad de los PAT llega por WhatsApp (confirmado el 13/11/2026). WhatsApp se modela como sistema externo no institucional porque los datos pasan por él antes de llegar a la hoja; es el hallazgo H7 del Taller 4.
   - El equipo de cómputo de la coordinadora no se dibuja en el C2 porque es infraestructura, no un contenedor. Aparece en el mapa del Taller 4.
 
 ## 📈 Diagrama final entregado
@@ -56,13 +58,14 @@ Ambos archivos se abren con [draw.io / diagrams.net](https://app.diagrams.net/) 
 | Nombre del elemento | Tipo | Descripción | Responsable |
 |---|---|---|---|
 | Coordinadora de la encuesta | Actor | Opera todo el proceso: exporta de SIGA, arma la muestra, asigna PAT y avisa a los profesores | Vicerrectoría de Desarrollo (Johanna Molina) |
-| Estudiante PAT | Actor | Reporta su disponibilidad horaria y aplica la encuesta en el salón | Estudiantes PAT |
+| Estudiante PAT | Actor | Envía su disponibilidad por WhatsApp, responde la encuesta y luego la aplica en el salón | Estudiantes PAT |
 | Profesor | Actor | Recibe el aviso por correo y acepta o rechaza ceder su clase | Facultades |
 | Gestión manual de la logística de la encuesta | Sistema en alcance (AS-IS) | Proceso actual, operado a mano con Excel y correo | Vicerrectoría de Desarrollo |
 | SIGA | Sistema externo | Fuente de horarios, programas y datos personales; sin API conocida, exportación manual | Dirección de TI - Unisabana |
 | Correo institucional (Exchange Online) | Sistema externo | Canal por el que se avisa a cada profesor y se reciben sus respuestas | Dirección de TI - Unisabana |
-| Hoja de Muestreo | Contenedor de datos (Excel en OneDrive) | Muestra de estudiantes por programa y semestre; contiene copias de datos personales de SIGA | Coordinadora de la encuesta |
-| Hoja de Asignación PAT | Contenedor de datos (Excel en OneDrive) | Cruce de clases muestreadas con la disponibilidad de los PAT; lista de clases a notificar | Coordinadora de la encuesta |
+| WhatsApp | Sistema externo (no institucional) | Canal por el que los PAT envían su disponibilidad horaria a la coordinadora | Tercero (fuera de la universidad) |
+| Hoja de Muestreo | Contenedor de datos (Excel en drive compartido de OneDrive) | Muestra de estudiantes por programa y semestre; contiene copias de datos personales de SIGA | Coordinadora de la encuesta |
+| Hoja de Asignación PAT | Contenedor de datos (Excel en drive compartido de OneDrive) | Cruce de clases muestreadas con la disponibilidad de los PAT; lista de clases a notificar | Coordinadora de la encuesta |
 
 ## 🔍 Investigación complementaria
 
